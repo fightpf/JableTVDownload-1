@@ -8,6 +8,7 @@
 import requests
 import os
 import re
+import ssl
 import urllib.request
 import m3u8
 from Crypto.Cipher import AES
@@ -40,11 +41,17 @@ dirName = urlSplit[-2]
 if not os.path.exists(dirName):
     os.makedirs(dirName)
 folderPath = os.path.join(os.getcwd(), dirName)
+checkmp4_win = folderPath+"\\"+dirName+".mp4"
+checkmp4_linux =folderPath+"/"+dirName+".mp4"
+if os.path.exists(checkmp4_win) or os.path.exists(checkmp4_linux):
+    exit()   
+
 # In[4]:
 
 
 # 得到 m3u8 網址
-htmlfile = cloudscraper.create_scraper(browser='firefox', delay=10).get(url)
+ssl._create_default_https_context = ssl._create_unverified_context
+htmlfile = cloudscraper.create_scraper(browser={'browser': 'firefox','platform': 'windows','mobile': False}, delay=10).get(url)
 result = re.search("https://.+m3u8", htmlfile.text)
 m3u8url = result[0]
 
