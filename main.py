@@ -40,6 +40,10 @@ dirName = urlSplit[-2]
 if not os.path.exists(dirName):
     os.makedirs(dirName)
 folderPath = os.path.join(os.getcwd(), dirName)
+checkmp4 = folderPath+"\\"+dirName+".mp4"
+print(checkmp4)
+if os.path.exists(checkmp4):
+    exit()   
 # In[4]:
 
 
