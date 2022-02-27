@@ -30,11 +30,11 @@ def scrape(ci, folderPath, downloadList, urls):
             urls.split('/')[-1], len(downloadList), response.status_code), end='', flush=True)
 
 
-def prepareCrawl(ci, folderPath, tsList):
+def prepareCrawl(ci, folderPath, tsList,dirName):
     downloadList = copy.deepcopy(tsList)
     # 開始時間
     start_time = time.time()
-    print('開始下載 ' + str(len(downloadList)) + ' 個檔案..', end='')
+    print(dirName+'開始下載 ' + str(len(downloadList)) + ' 個檔案..', end='')
     print('預計等待時間: {0:.2f} 分鐘 視影片長度與網路速度而定)'.format(len(downloadList) / 150))
 
     # 開始爬取

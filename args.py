@@ -12,6 +12,8 @@ def get_parser():
                         help="Enter True for download random ")
     parser.add_argument("--url", type=str, default="",
                         help="Jable TV URL to download")
+    parser.add_argument("--hot", type=bool, default=False,
+                        help="Jable TV hot URL to download")
 
     return parser
 
@@ -26,6 +28,21 @@ def av_recommand():
     h6_tags = soup.find_all('h6', class_='title')
     av_list = re.findall(r'https[^"]+', str(h6_tags))
     return random.choice(av_list)
+def av_list(num):
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    result = []
+    for i in range(1,int(num)+1):
+        url = 'https://jable.tv/hot/'+str(i) +"/"
+        request = Request(url, headers=headers)
+        web_content = urlopen(request).read()
+        # 得到繞過轉址後的 html
+        soup = BeautifulSoup(web_content, 'html.parser')
+        h6_tags = soup.find_all('h6', class_='title')
+        av_list = re.findall(r'https[^"]+', str(h6_tags))
+        result += av_list
+        print(result)
+    return result
+
 
 
 # print(av_recommand())

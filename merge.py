@@ -1,6 +1,6 @@
 import os
 import time
-def mergeMp4(folderPath, tsList):
+def mergeMp4(folderPath, tsList,dirName):
 	# 開始時間
     start_time = time.time()
     print('開始合成影片..')
@@ -17,4 +17,4 @@ def mergeMp4(folderPath, tsList):
             print(file + " 失敗 ")
     end_time = time.time()
     print('花費 {0:.2f} 秒合成影片'.format(end_time - start_time))
-    print('下載完成!')
+    print(dirName+'下載完成!')
